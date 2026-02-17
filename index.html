@@ -1,13 +1,17 @@
 <!DOCTYPE html>
-<html lang="pt-pt">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gustavo Figueiredo | Advocacia e Consultoria Jurídica - OAB/MT 37036-O</title>
-    <!-- Tailwind CSS para estilização moderna -->
+    
+    <!-- Tailwind CSS para design moderno e responsivo -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Font Awesome 6.5.1 para ícones garantidos -->
+    
+    <!-- Font Awesome para ícones profissionais -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+    
+    <!-- Tipografia Montserrat conforme Ficha Técnica -->
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800&display=swap');
         
@@ -27,7 +31,8 @@
         .bg-brand-gold { background-color: var(--brand-gold); }
         .bg-brand-navy { background-color: var(--brand-navy); }
 
-        /* Gradiente para a secção principal */
+        /* --- IMAGEM DE FUNDO DO TOPO (HERO) --- */
+        /* Substitua o link abaixo pela sua imagem preferida do agronegócio ou direito */
         .hero-gradient {
             background: linear-gradient(rgba(28, 29, 41, 0.96), rgba(28, 29, 41, 0.92)), 
                         url('https://images.unsplash.com/photo-1500382017468-9049fed747ef?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80');
@@ -47,264 +52,279 @@
         .practice-card {
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
+
+        .article-content p { margin-bottom: 1.5rem; line-height: 1.8; color: #4a5568; text-align: justify; }
+        .article-content h2 { font-weight: 800; font-size: 1.5rem; margin-top: 2rem; margin-bottom: 1rem; color: var(--brand-navy); text-transform: uppercase; }
         
-        /* Ajuste para preenchimento total */
+        .hidden-view { display: none; }
+        
         html, body { height: 100%; width: 100%; }
     </style>
 </head>
 <body class="bg-white text-[#1c1d29] overflow-x-hidden">
 
-    <!-- Barra de Navegação Ampliada -->
-    <nav class="fixed w-full z-50 bg-[#1c1d29]/95 backdrop-blur-md shadow-lg border-b border-white/5">
+    <!-- Barra de Navegação (Logotipo Ampliado) -->
+    <nav class="fixed w-full z-[100] bg-[#1c1d29]/95 backdrop-blur-md shadow-lg border-b border-white/5">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-32">
                 <div class="flex items-center">
-                    <!-- ÁREA DO LOGÓTIPO -->
-                    <a href="#inicio" class="flex items-center">
-                        <!-- Logótipo principal (logo.png.png) com altura h-24 para maior visibilidade -->
-                        <img src="logo.png.png" alt="Gustavo Figueiredo Advocacia" class="h-24 w-auto object-contain" onerror="this.style.display='none'; document.getElementById('text-logo').style.display='flex';">
+                    <a href="javascript:void(0)" onclick="showView('home')" class="flex items-center">
+                        <!-- --- LOGOTIPO PRINCIPAL --- -->
+                        <!-- Para trocar: substitua "logo.png" pelo seu arquivo no GitHub -->
+                        <img src="logo.png" alt="Gustavo Figueiredo Advocacia" class="h-24 w-auto object-contain" onerror="this.style.display='none'; document.getElementById('text-logo').style.display='flex';">
                         
                         <!-- Fallback de texto caso a imagem não carregue -->
                         <div id="text-logo" class="hidden flex-col border-l-4 border-[#b18846] pl-6">
                             <span class="text-3xl font-bold tracking-widest text-white leading-none uppercase">Gustavo</span>
-                            <span class="text-3xl font-bold tracking-widest text-white leading-none uppercase">Figueiredo</span>
+                            <span class="text-3xl font-bold tracking-widest text-white leading-none uppercase text-nowrap">Figueiredo</span>
                             <span class="text-[10px] uppercase tracking-[0.3em] text-[#b18846] mt-2 font-semibold">Advocacia e Consultoria Jurídica</span>
                         </div>
                     </a>
                 </div>
-                <!-- Menu Desktop -->
-                <div class="hidden md:flex items-center space-x-12">
-                    <a href="#inicio" class="text-white/80 hover:text-[#b18846] transition-colors text-xs font-semibold uppercase tracking-widest">Início</a>
-                    <a href="#sobre" class="text-white/80 hover:text-[#b18846] transition-colors text-xs font-semibold uppercase tracking-widest">O Especialista</a>
-                    <a href="#atuacao" class="text-white/80 hover:text-[#b18846] transition-colors text-xs font-semibold uppercase tracking-widest">Atuação</a>
-                    <a href="#contato" class="bg-[#b18846] text-[#1c1d29] px-8 py-3 rounded-sm hover:bg-white transition-all font-bold uppercase text-[10px] tracking-widest text-center shadow-lg">Agendar Reunião</a>
+                <div class="hidden md:flex items-center space-x-10">
+                    <a href="javascript:void(0)" onclick="showView('home')" class="text-white/80 hover:text-[#b18846] transition-colors text-xs font-semibold uppercase tracking-widest">Início</a>
+                    <a href="javascript:void(0)" onclick="scrollToSection('atuacao')" class="text-white/80 hover:text-[#b18846] transition-colors text-xs font-semibold uppercase tracking-widest nav-link-home">Atuação</a>
+                    <a href="javascript:void(0)" onclick="scrollToSection('blog')" class="text-white/80 hover:text-[#b18846] transition-colors text-xs font-semibold uppercase tracking-widest nav-link-home">Blog</a>
+                    <a href="javascript:void(0)" onclick="scrollToSection('contato')" class="bg-[#b18846] text-[#1c1d29] px-6 py-2.5 rounded-sm hover:bg-white transition-all font-bold uppercase text-[10px] tracking-widest text-center shadow-lg nav-link-home">Contato</a>
                 </div>
             </div>
         </div>
     </nav>
 
-    <!-- Secção Hero com Foco em Resultados -->
-    <section id="inicio" class="hero-gradient h-screen flex items-center pt-20">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-            <div class="max-w-5xl">
-                <div class="inline-flex items-center gap-3 bg-[#b18846]/10 border border-[#b18846]/30 px-5 py-2 rounded-full mb-8">
-                    <i class="fa-solid fa-earth-americas text-[#b18846] text-xs"></i>
-                    <span class="text-[#b18846] font-bold text-[10px] uppercase tracking-widest">Atendimento Judicial e Extrajudicial | Todo o Brasil</span>
-                </div>
-                <h1 class="text-5xl md:text-6xl text-white font-extrabold mb-8 leading-[1.1] uppercase tracking-tight">
-                    Segurança Jurídica em <br><span class="text-[#b18846]">Direito Imobiliário e Agronegócio.</span>
-                </h1>
-                <p class="text-white/70 text-lg md:text-xl mb-12 leading-relaxed font-light max-w-2xl text-justify">
-                    Especialista em Processo Civil e Direito Imobiliário com foco na regularização de ativos patrimoniais e sucessões. Atuação estratégica online para garantir a proteção dos seus bens em qualquer região do país.
-                </p>
-                <div class="flex flex-col sm:flex-row gap-6">
-                    <a href="https://wa.me/5565999741347" target="_blank" class="bg-[#b18846] text-[#1c1d29] px-12 py-5 rounded-sm text-sm font-extrabold uppercase tracking-widest hover:bg-white transition-all text-center shadow-2xl flex items-center justify-center gap-3">
-                        <i class="fa-brands fa-whatsapp text-lg"></i> Iniciar Atendimento Online
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Credenciais Profissionais e Localização -->
-    <section class="py-12 bg-slate-50 border-b border-slate-100">
-        <div class="max-w-7xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center gap-6">
-            <p class="text-[11px] text-slate-500 uppercase tracking-[0.4em] font-bold">Inscrição Profissional: OAB/MT 37036-O</p>
-            <div class="h-px w-16 bg-slate-200 hidden md:block"></div>
-            <p class="text-[11px] text-slate-500 uppercase tracking-[0.4em] font-bold">Cáceres - Mato Grosso</p>
-        </div>
-    </section>
-
-    <!-- Sobre o Especialista -->
-    <section id="sobre" class="py-24 bg-white text-[#1c1d29]">
-        <div class="max-w-7xl mx-auto px-4 grid md:grid-cols-2 gap-20 items-center">
-            <div class="relative">
-                <img src="https://images.unsplash.com/photo-1556155092-490a1ba16284?auto=format&fit=crop&w=800&q=80" alt="Dr. Gustavo Figueiredo" class="rounded-sm shadow-2xl grayscale hover:grayscale-0 transition-all duration-700">
-                <div class="absolute -bottom-8 -left-8 bg-[#1c1d29] px-10 py-6 text-[#b18846] font-bold uppercase tracking-widest text-xs border-l-4 border-[#b18846] shadow-xl">
-                    Excelência Técnica
-                </div>
-            </div>
-            <div>
-                <span class="text-[#b18846] font-bold uppercase tracking-[0.3em] text-[10px] mb-4 block">Apresentação</span>
-                <h2 class="text-4xl font-extrabold mb-8 uppercase tracking-tighter italic">Dr. Gustavo Figueiredo</h2>
-                <div class="space-y-6 text-slate-500 text-lg leading-relaxed font-normal text-justify">
-                    <p>
-                        Sediado em **Cáceres-MT**, o escritório atua de forma consultiva e contenciosa, unindo a tradição do rigor jurídico à agilidade da advocacia moderna.
+    <!-- VISTA PRINCIPAL (HOME) -->
+    <main id="home-view">
+        <!-- Hero Section -->
+        <section id="inicio" class="hero-gradient h-screen flex items-center pt-20">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+                <div class="max-w-4xl">
+                    <div class="inline-flex items-center gap-2 bg-[#b18846]/10 border border-[#b18846]/30 px-4 py-1.5 rounded-full mb-8">
+                        <i class="fa-solid fa-earth-americas text-[#b18846] text-[10px]"></i>
+                        <span class="text-[#b18846] font-bold text-[9px] uppercase tracking-widest">Atendimento Digital em Âmbito Nacional</span>
+                    </div>
+                    <h1 class="text-4xl md:text-5xl text-white font-extrabold mb-8 leading-tight uppercase tracking-tight">
+                        Direito Imobiliário e <br><span class="text-[#b18846]">Agronegócio de Alta Performance.</span>
+                    </h1>
+                    <p class="text-white/60 text-lg md:text-xl mb-12 leading-relaxed font-light max-w-2xl text-justify">
+                        Especialista em Processo Civil focado na regularização de ativos patrimoniais e sucessões, com atuação estratégica judicial e extrajudicial em todo o país.
                     </p>
-                    <p>
-                        A especialização em **Processo Civil** é o pilar fundamental para garantir o êxito em causas complexas de **Direito Imobiliário e Agronegócio**, seja na esfera judicial ou através de procedimentos extrajudiciais em cartórios.
-                    </p>
-                    <p>
-                        Com o suporte da **Advocacia Digital**, oferecemos um atendimento sem barreiras geográficas, permitindo que proprietários rurais e urbanos regularizem os seus títulos com total segurança e transparência.
-                    </p>
+                    <div class="flex flex-col sm:flex-row gap-6">
+                        <a href="https://wa.me/5565999741347" target="_blank" class="bg-[#b18846] text-[#1c1d29] px-10 py-4 rounded-sm text-xs font-bold uppercase tracking-widest hover:bg-white transition-all text-center shadow-xl">
+                            <i class="fa-brands fa-whatsapp mr-2"></i> Iniciar Atendimento
+                        </a>
+                    </div>
                 </div>
             </div>
+        </section>
+
+        <!-- Barra de Credenciais -->
+        <section class="py-10 bg-slate-50 border-b border-slate-100">
+            <div class="max-w-7xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center gap-4">
+                <p class="text-[10px] text-slate-400 uppercase tracking-[0.4em] font-bold">Inscrição Profissional: OAB/MT 37036-O</p>
+                <div class="h-px w-12 bg-slate-200 hidden md:block"></div>
+                <p class="text-[10px] text-slate-400 uppercase tracking-[0.4em] font-bold">Cáceres - Mato Grosso</p>
+            </div>
+        </section>
+
+        <!-- Seção Sobre -->
+        <section id="sobre" class="py-24 bg-white text-[#1c1d29]">
+            <div class="max-w-7xl mx-auto px-4 grid md:grid-cols-2 gap-20 items-center">
+                <div class="relative">
+                    <!-- --- IMAGEM PROFISSIONAL --- -->
+                    <img src="https://images.unsplash.com/photo-1556155092-490a1ba16284?auto=format&fit=crop&w=800&q=80" alt="Dr. Gustavo Figueiredo" class="rounded-sm shadow-2xl grayscale hover:grayscale-0 transition-all duration-700">
+                    <div class="absolute -bottom-6 -left-6 bg-[#1c1d29] px-8 py-5 text-[#b18846] font-bold uppercase tracking-widest text-[10px] border-l-4 border-[#b18846]">
+                        Atuação Judicial e Extrajudicial
+                    </div>
+                </div>
+                <div>
+                    <span class="text-[#b18846] font-bold uppercase tracking-[0.3em] text-[10px] mb-4 block">Institucional</span>
+                    <h2 class="text-3xl font-extrabold mb-8 uppercase tracking-tighter italic">Dr. Gustavo Figueiredo</h2>
+                    <div class="space-y-6 text-slate-500 text-base leading-relaxed font-normal text-justify">
+                        <p>Sediado em **Cáceres-MT**, o escritório atua de forma consultiva e contenciosa, unindo a tradição do rigor jurídico à agilidade da advocacia moderna.</p>
+                        <p>A especialização em **Processo Civil** é o pilar para garantir o êxito em causas complexas de Direito Imobiliário e Agronegócio.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Áreas de Atuação com Símbolos -->
+        <section id="atuacao" class="py-24 bg-slate-50">
+            <div class="max-w-7xl mx-auto px-4">
+                <div class="text-center mb-20">
+                    <span class="text-[#b18846] font-bold uppercase tracking-[0.3em] text-[10px] mb-4 block">Especialidades</span>
+                    <h2 class="text-3xl font-extrabold text-[#1c1d29] uppercase tracking-tighter section-title inline-block">Consultoria Técnica</h2>
+                </div>
+
+                <div class="grid md:grid-cols-3 gap-6">
+                    <!-- Agronegócio -->
+                    <div class="practice-card bg-white p-10 border border-slate-100 flex flex-col h-full shadow-sm hover:shadow-lg transition-all">
+                        <div class="mb-8"><i class="fa-solid fa-wheat-awn text-4xl text-[#b18846]"></i></div>
+                        <h3 class="text-lg font-extrabold text-[#1c1d29] uppercase tracking-tight mb-4">Direito do Agronegócio</h3>
+                        <p class="text-slate-500 text-sm leading-relaxed mb-6">Contratos agrários, crédito rural e regularização de glebas produtivas.</p>
+                        <ul class="space-y-3 mt-auto border-t border-slate-100 pt-6">
+                            <li class="flex items-center gap-3 text-[10px] font-bold uppercase tracking-widest text-[#1c1d29]">
+                                <i class="fa-solid fa-circle-check text-[#b18846]"></i> Contratos Agrários
+                            </li>
+                            <li class="flex items-center gap-3 text-[10px] font-bold uppercase tracking-widest text-[#1c1d29]">
+                                <i class="fa-solid fa-circle-check text-[#b18846]"></i> Crédito Rural
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Imobiliário -->
+                    <div class="practice-card bg-white p-10 border border-slate-100 flex flex-col h-full shadow-sm hover:shadow-lg transition-all">
+                        <div class="mb-8"><i class="fa-solid fa-building-circle-check text-4xl text-[#b18846]"></i></div>
+                        <h3 class="text-lg font-extrabold text-[#1c1d29] uppercase tracking-tight mb-4">Regularização Imobiliária</h3>
+                        <p class="text-slate-500 text-sm leading-relaxed mb-6">Retificações de área, desmembramentos e saneamento de títulos.</p>
+                        <ul class="space-y-3 mt-auto border-t border-slate-100 pt-6">
+                            <li class="flex items-center gap-3 text-[10px] font-bold uppercase tracking-widest text-[#1c1d29]">
+                                <i class="fa-solid fa-circle-check text-[#b18846]"></i> Judicial e Extrajudicial
+                            </li>
+                            <li class="flex items-center gap-3 text-[10px] font-bold uppercase tracking-widest text-[#1c1d29]">
+                                <i class="fa-solid fa-circle-check text-[#b18846]"></i> Saneamento de Títulos
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Usucapião -->
+                    <div class="practice-card bg-white p-10 border border-slate-100 flex flex-col h-full shadow-sm hover:shadow-lg transition-all">
+                        <div class="mb-8"><i class="fa-solid fa-scale-balanced text-4xl text-[#b18846]"></i></div>
+                        <h3 class="text-lg font-extrabold text-[#1c1d29] uppercase tracking-tight mb-4">Usucapião e Posse</h3>
+                        <p class="text-slate-500 text-sm leading-relaxed mb-6">Instrumentos para obtenção do título de propriedade definitiva.</p>
+                        <ul class="space-y-3 mt-auto border-t border-slate-100 pt-6">
+                            <li class="flex items-center gap-3 text-[10px] font-bold uppercase tracking-widest text-[#1c1d29]">
+                                <i class="fa-solid fa-circle-check text-[#b18846]"></i> Adjudicação Compulsória
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção de Blog -->
+        <section id="blog" class="py-24 bg-white">
+            <div class="max-w-7xl mx-auto px-4">
+                <div class="text-center mb-16">
+                    <span class="text-[#b18846] font-bold uppercase tracking-[0.3em] text-[10px] mb-4 block">Conteúdo</span>
+                    <h2 class="text-3xl font-extrabold text-[#1c1d29] uppercase tracking-tighter section-title inline-block">Artigos Informativos</h2>
+                </div>
+                <div id="articles-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Gerado via JS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Contato -->
+        <section id="contato" class="py-24 bg-[#1c1d29] text-white">
+            <div class="max-w-7xl mx-auto px-4 grid md:grid-cols-2 gap-20 items-center">
+                <div>
+                    <h2 class="text-4xl font-extrabold mb-8 uppercase tracking-tighter text-[#b18846]">Contato</h2>
+                    <div class="space-y-6">
+                        <p class="flex items-center gap-4 font-bold text-lg"><i class="fa-solid fa-phone text-[#b18846]"></i> 65 99974-1347</p>
+                        <p class="flex items-center gap-4 text-white/50 text-xs lowercase"><i class="fa-solid fa-envelope text-[#b18846]"></i> gustavofigueiredoadvocacia@gmail.com</p>
+                    </div>
+                </div>
+                <div class="text-center">
+                    <img src="logo.png" alt="Logo" class="h-20 w-auto opacity-50 grayscale mx-auto" onerror="this.style.display='none'">
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- VISTA DO LEITOR DE BLOG -->
+    <main id="reader-view" class="hidden-view pt-40 pb-24">
+        <div class="max-w-4xl mx-auto px-4">
+            <button onclick="showView('home')" class="flex items-center gap-2 text-[#b18846] font-bold uppercase text-[10px] tracking-widest mb-10 hover:translate-x-[-5px] transition-transform">
+                <i class="fa-solid fa-arrow-left"></i> Voltar
+            </button>
+            <div id="article-full-content"></div>
         </div>
-    </section>
+    </main>
 
-    <!-- Áreas de Atuação com Ícones e Check-marks -->
-    <section id="atuacao" class="py-24 bg-slate-50">
-        <div class="max-w-7xl mx-auto px-4">
-            <div class="text-center mb-20">
-                <span class="text-[#b18846] font-bold uppercase tracking-[0.3em] text-[10px] mb-4 block">Frentes de Trabalho</span>
-                <h2 class="text-4xl font-extrabold text-[#1c1d29] uppercase tracking-tighter section-title inline-block">Consultoria Especializada</h2>
-            </div>
-
-            <div class="grid md:grid-cols-3 gap-8">
-                <!-- Direito do Agronegócio -->
-                <div class="practice-card bg-white p-12 border border-slate-100 flex flex-col h-full shadow-sm hover:shadow-xl transition-all">
-                    <div class="mb-10"><i class="fa-solid fa-wheat-awn text-4xl text-[#b18846]"></i></div>
-                    <h3 class="text-xl font-extrabold text-[#1c1d29] uppercase tracking-tight mb-6 leading-snug">Direito do Agronegócio</h3>
-                    <p class="text-slate-500 text-sm leading-relaxed mb-8">Soluções estratégicas para o produtor rural e empresas do setor agropecuário.</p>
-                    <ul class="space-y-4 mt-auto border-t border-slate-100 pt-8">
-                        <li class="flex items-center gap-4 text-[10px] font-bold uppercase tracking-widest text-[#1c1d29]">
-                            <i class="fa-solid fa-circle-check text-[#b18846] text-sm"></i> Contratos Agrários
-                        </li>
-                        <li class="flex items-center gap-4 text-[10px] font-bold uppercase tracking-widest text-[#1c1d29]">
-                            <i class="fa-solid fa-circle-check text-[#b18846] text-sm"></i> Crédito Rural
-                        </li>
-                        <li class="flex items-center gap-4 text-[10px] font-bold uppercase tracking-widest text-[#1c1d29]">
-                            <i class="fa-solid fa-circle-check text-[#b18846] text-sm"></i> Regularização de Glebas
-                        </li>
-                    </ul>
-                </div>
-
-                <!-- Regularização Imobiliária -->
-                <div class="practice-card bg-white p-12 border border-slate-100 flex flex-col h-full shadow-sm hover:shadow-xl transition-all">
-                    <div class="mb-10"><i class="fa-solid fa-building-circle-check text-4xl text-[#b18846]"></i></div>
-                    <h3 class="text-xl font-extrabold text-[#1c1d29] uppercase tracking-tight mb-6 leading-snug">Regularização Imobiliária</h3>
-                    <p class="text-slate-500 text-sm leading-relaxed mb-8">Gestão integral de documentação para transformar posse em propriedade plena.</p>
-                    <ul class="space-y-4 mt-auto border-t border-slate-100 pt-8">
-                        <li class="flex items-center gap-4 text-[10px] font-bold uppercase tracking-widest text-[#1c1d29]">
-                            <i class="fa-solid fa-circle-check text-[#b18846] text-sm"></i> Retificações de Área
-                        </li>
-                        <li class="flex items-center gap-4 text-[10px] font-bold uppercase tracking-widest text-[#1c1d29]">
-                            <i class="fa-solid fa-circle-check text-[#b18846] text-sm"></i> Desmembramentos
-                        </li>
-                        <li class="flex items-center gap-4 text-[10px] font-bold uppercase tracking-widest text-[#1c1d29]">
-                            <i class="fa-solid fa-circle-check text-[#b18846] text-sm"></i> Atuação Extrajudicial
-                        </li>
-                    </ul>
-                </div>
-
-                <!-- Usucapião e Posse -->
-                <div class="practice-card bg-white p-12 border border-slate-100 flex flex-col h-full shadow-sm hover:shadow-xl transition-all">
-                    <div class="mb-10"><i class="fa-solid fa-scale-balanced text-4xl text-[#b18846]"></i></div>
-                    <h3 class="text-xl font-extrabold text-[#1c1d29] uppercase tracking-tight mb-6 leading-snug">Usucapião e Adjudicação</h3>
-                    <p class="text-slate-500 text-sm leading-relaxed mb-8">Obtenção do título de propriedade definitiva com celeridade e segurança.</p>
-                    <ul class="space-y-4 mt-auto border-t border-slate-100 pt-8">
-                        <li class="flex items-center gap-4 text-[10px] font-bold uppercase tracking-widest text-[#1c1d29]">
-                            <i class="fa-solid fa-circle-check text-[#b18846] text-sm"></i> Usucapião Judicial
-                        </li>
-                        <li class="flex items-center gap-4 text-[10px] font-bold uppercase tracking-widest text-[#1c1d29]">
-                            <i class="fa-solid fa-circle-check text-[#b18846] text-sm"></i> Adjudicação Compulsória
-                        </li>
-                        <li class="flex items-center gap-4 text-[10px] font-bold uppercase tracking-widest text-[#1c1d29]">
-                            <i class="fa-solid fa-circle-check text-[#b18846] text-sm"></i> Reconhecimento Extrajudicial
-                        </li>
-                    </ul>
-                </div>
-
-                <!-- Inventário e Sucessões -->
-                <div class="practice-card bg-white p-12 border border-slate-100 flex flex-col h-full shadow-sm md:col-span-2 hover:shadow-xl transition-all">
-                    <div class="flex flex-col md:flex-row md:items-center gap-12">
-                        <div class="shrink-0"><i class="fa-solid fa-scroll text-5xl text-[#b18846]"></i></div>
-                        <div class="flex-grow">
-                            <h3 class="text-xl font-extrabold text-[#1c1d29] uppercase tracking-tight mb-4">Inventário e Planeamento Sucessório</h3>
-                            <p class="text-slate-500 text-sm leading-relaxed mb-8">Condução técnica da transmissão patrimonial urbana e rural com agilidade processual.</p>
-                            <div class="grid grid-cols-2 gap-6 border-t border-slate-100 pt-8">
-                                <div class="flex items-center gap-4 text-[10px] font-bold uppercase tracking-widest text-[#1c1d29]">
-                                    <i class="fa-solid fa-circle-check text-[#b18846] text-sm"></i> Inventário Extrajudicial
-                                </div>
-                                <div class="flex items-center gap-4 text-[10px] font-bold uppercase tracking-widest text-[#1c1d29]">
-                                    <i class="fa-solid fa-circle-check text-[#b18846] text-sm"></i> Inventário Judicial
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Rigor Processual -->
-                <div class="practice-card bg-[#1c1d29] p-12 flex flex-col h-full shadow-2xl">
-                    <div class="mb-10"><i class="fa-solid fa-gavel text-4xl text-[#b18846]"></i></div>
-                    <h3 class="text-xl font-extrabold text-white uppercase tracking-tight mb-6 leading-snug">Processo Civil Estratégico</h3>
-                    <p class="text-white/50 text-sm leading-relaxed mb-6 flex-grow text-justify">Domínio técnico dos ritos processuais para garantir o melhor resultado em demandas possessórias e patrimoniais de alta complexidade.</p>
-                    <div class="h-1 w-16 bg-[#b18846]"></div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contacto e Informações -->
-    <section id="contato" class="py-24 bg-[#1c1d29] relative overflow-hidden">
-        <div class="max-w-7xl mx-auto px-4 grid md:grid-cols-2 gap-20 items-center">
-            <div class="text-white">
-                <span class="text-[#b18846] font-bold uppercase tracking-[0.3em] text-[10px] mb-4 block">Fale com o Dr. Gustavo</span>
-                <h2 class="text-4xl font-extrabold mb-10 uppercase tracking-tighter leading-none">Inicie a Sua <span class="text-[#b18846]">Consultoria Digital.</span></h2>
-                <p class="text-white/50 mb-12 text-lg font-light leading-relaxed">As consultas para análise de casos são realizadas mediante agendamento prévio por videoconferência ou WhatsApp, garantindo total sigilo profissional.</p>
-                
-                <div class="space-y-10">
-                    <div class="flex items-center gap-8 group">
-                        <i class="fa-solid fa-phone text-[#b18846] text-2xl"></i>
-                        <div>
-                            <p class="text-[9px] text-slate-500 uppercase tracking-widest font-bold mb-1">WhatsApp de Contacto</p>
-                            <span class="font-bold text-xl tracking-widest">65 99974-1347</span>
-                        </div>
-                    </div>
-                    <div class="flex items-center gap-8 group">
-                        <i class="fa-solid fa-envelope text-[#b18846] text-2xl"></i>
-                        <div>
-                            <p class="text-[9px] text-slate-500 uppercase tracking-widest font-bold mb-1">E-mail Institucional</p>
-                            <span class="font-bold text-lg tracking-tight text-white/80 lowercase">gustavofigueiredoadvocacia@gmail.com</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="bg-white p-12 rounded-sm shadow-2xl relative">
-                <form class="space-y-8" onsubmit="alert('Para um contacto mais ágil, utilize o botão de WhatsApp.'); return false;">
-                    <h4 class="text-[#1c1d29] font-bold uppercase tracking-widest text-xs mb-8">Solicitar Análise Online</h4>
-                    <div>
-                        <input type="text" placeholder="NOME COMPLETO" class="w-full bg-slate-50 border-b-2 border-slate-200 p-4 text-[10px] font-bold uppercase tracking-widest focus:border-[#b18846] outline-none transition-colors">
-                    </div>
-                    <div class="grid grid-cols-2 gap-6">
-                        <input type="text" placeholder="WHATSAPP" class="w-full bg-slate-50 border-b-2 border-slate-200 p-4 text-[10px] font-bold uppercase tracking-widest focus:border-[#b18846] outline-none transition-colors">
-                        <select class="w-full bg-slate-50 border-b-2 border-slate-200 p-4 text-[10px] font-bold uppercase tracking-widest focus:border-[#b18846] outline-none text-slate-400">
-                            <option>ASSUNTO</option>
-                            <option>AGRONEGÓCIO</option>
-                            <option>REGULARIZAÇÃO URBANA</option>
-                            <option>INVENTÁRIO</option>
-                        </select>
-                    </div>
-                    <textarea rows="4" placeholder="BREVE DESCRIÇÃO DO TEMA" class="w-full bg-slate-50 border-b-2 border-slate-200 p-4 text-[10px] font-bold uppercase tracking-widest focus:border-[#b18846] outline-none transition-colors"></textarea>
-                    <button class="w-full bg-[#1c1d29] text-white py-6 font-extrabold uppercase tracking-[0.3em] text-[10px] hover:bg-[#b18846] transition-all shadow-xl">Enviar Solicitação</button>
-                </form>
-            </div>
-        </div>
-    </section>
-
-    <!-- Rodapé em Conformidade com a OAB -->
-    <footer class="bg-[#1c1d29] py-16 border-t border-white/5">
-        <div class="max-w-7xl mx-auto px-4 text-center">
-            <div class="flex justify-center mb-12">
-                <img src="logo.png.png" alt="Logotipo Gustavo Figueiredo" class="h-20 w-auto grayscale opacity-50 hover:grayscale-0 hover:opacity-100 transition-all" onerror="this.style.display='none'">
-            </div>
-            <div class="text-white/20 text-[9px] uppercase tracking-[0.3em] space-y-6">
-                <p class="font-bold tracking-[0.5em]">OAB/MT 37036-O</p>
-                <p>&copy; 2024 Gustavo Figueiredo Advocacia. Cáceres-MT.</p>
-                <p class="max-w-2xl mx-auto opacity-50 italic normal-case text-[11px] leading-relaxed">
-                    Este site possui caráter meramente informativo, em conformidade com o Provimento 205/2021 e o Código de Ética e Disciplina da OAB.
-                </p>
-            </div>
-        </div>
+    <!-- Rodapé -->
+    <footer class="bg-[#1c1d29] py-12 border-t border-white/5 text-center text-white/20 text-[9px] uppercase tracking-[0.3em]">
+        <p>OAB/MT 37036-O | Conteúdo Informativo (Prov. 205/21 OAB)</p>
+        <p class="mt-2">&copy; 2024 Gustavo Figueiredo Advocacia.</p>
     </footer>
 
-    <!-- Botão Flutuante de WhatsApp -->
-    <a href="https://wa.me/5565999741347" target="_blank" class="fixed bottom-10 right-10 bg-[#25D366] text-white w-16 h-16 rounded-full flex items-center justify-center text-3xl shadow-2xl hover:scale-110 transition-transform z-50">
+    <!-- WhatsApp -->
+    <a href="https://wa.me/5565999741347" target="_blank" class="fixed bottom-8 right-8 bg-[#25D366] text-white w-14 h-14 rounded-full flex items-center justify-center text-2xl shadow-2xl z-50">
         <i class="fa-brands fa-whatsapp"></i>
     </a>
 
+    <!-- LÓGICA DO BLOG -->
+    <script>
+        const articles = [
+            {
+                id: 1,
+                title: "Regularização de Glebas Rurais",
+                excerpt: "Saiba como a matrícula saneada impacta diretamente no acesso ao crédito rural.",
+                content: `
+                    <p>A regularização imobiliária rural é um passo fundamental para o produtor que busca segurança e expansão.</p>
+                    <h2>Segurança Jurídica</h2>
+                    <p>O título pleno evita litígios e permite o oferecimento da terra como garantia bancária.</p>
+                `,
+                image: "https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=800&q=80",
+                date: "20 Fev 2024"
+            }
+        ];
+
+        function loadArticles() {
+            const grid = document.getElementById('articles-grid');
+            grid.innerHTML = articles.map(art => `
+                <div class="bg-white border border-slate-100 flex flex-col h-full shadow-sm hover:shadow-lg transition-all group overflow-hidden">
+                    <div class="h-56 overflow-hidden bg-slate-200">
+                        <img src="${art.image}" class="w-full h-full object-cover group-hover:scale-110 transition-all duration-500" alt="${art.title}">
+                    </div>
+                    <div class="p-8 flex flex-col flex-grow text-left">
+                        <span class="text-[9px] font-bold text-[#b18846] uppercase tracking-[0.2em] mb-3">${art.date}</span>
+                        <h3 class="text-lg font-extrabold text-[#1c1d29] uppercase tracking-tight mb-4 leading-tight">${art.title}</h3>
+                        <p class="text-slate-500 text-sm leading-relaxed mb-6 flex-grow">${art.excerpt}</p>
+                        <button onclick="openArticle(${art.id})" class="text-[#b18846] text-[10px] font-black uppercase tracking-[0.3em] flex items-center gap-2 hover:gap-4 transition-all">
+                            Ler Mais <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function openArticle(id) {
+            const art = articles.find(a => a.id === id);
+            if (!art) return;
+            document.getElementById('article-full-content').innerHTML = `
+                <span class="text-[#b18846] font-bold uppercase tracking-[0.4em] text-[10px] mb-4 block">${art.date}</span>
+                <h1 class="text-3xl md:text-5xl font-extrabold text-[#1c1d29] uppercase tracking-tighter leading-tight mb-10">${art.title}</h1>
+                <img src="${art.image}" class="w-full h-96 object-cover rounded-sm mb-12 shadow-xl" alt="${art.title}">
+                <div class="article-content">${art.content}</div>
+                <a href="https://wa.me/5565999741347" target="_blank" class="bg-[#b18846] text-[#1c1d29] px-6 py-3 rounded-sm text-[10px] font-extrabold uppercase tracking-widest hover:bg-[#1c1d29] hover:text-white transition-all inline-block mt-8">Tirar Dúvidas no WhatsApp</a>
+            `;
+            showView('reader');
+            window.scrollTo(0, 0);
+        }
+
+        function showView(view) {
+            const home = document.getElementById('home-view');
+            const reader = document.getElementById('reader-view');
+            const navLinks = document.querySelectorAll('.nav-link-home');
+            if (view === 'home') {
+                home.classList.remove('hidden-view');
+                reader.classList.add('hidden-view');
+                navLinks.forEach(l => l.style.display = 'block');
+            } else {
+                home.classList.add('hidden-view');
+                reader.classList.remove('hidden-view');
+                navLinks.forEach(l => l.style.display = 'none');
+            }
+        }
+
+        function scrollToSection(id) {
+            showView('home');
+            setTimeout(() => {
+                const el = document.getElementById(id);
+                if (el) el.scrollIntoView({ behavior: 'smooth' });
+            }, 100);
+        }
+
+        window.onload = loadArticles;
+    </script>
 </body>
 </html>
-
-
